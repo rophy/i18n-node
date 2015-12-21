@@ -383,8 +383,12 @@ function guessLanguage(request) {
           regions.push(region.toLowerCase());
         }
 
-        if (!match && locales[lang]) {
-          match = lang;
+        if (!match) {
+          if (locales[lang]) {
+            match = lang;
+          } else if (fallbacks[lang]) {
+            match = fallbacks[lang]
+          }
         }
 
         if (!fallbackMatch && locales[parentLang]) {
